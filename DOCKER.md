@@ -74,5 +74,7 @@ Use os mesmos `-f` do `up` em todos os comandos. Para remover os hooks, rode `py
 ## Problemas comuns
 
 - **Sala vazia:** confira se `~/.ai-operations-room/events.jsonl` está crescendo durante uma sessão do Claude Code e se a pasta pertence ao seu usuário (`ls -ld ~/.ai-operations-room`). Se for de `root`, corrija com `sudo chown -R $(id -u):$(id -g) ~/.ai-operations-room`.
-- **`unable to open database file`:** `AIOR_UID`/`AIOR_GID` não correspondem ao dono da pasta de dados.
+- **`unable to open database file`:** o container não consegue gravar na pasta montada. Confira com `docker inspect ai-operations-room --format '{{range .Mounts}}{{.Source}} {{end}}'`:
+  - Se aparecer `/root/...`, o compose foi executado com `sudo`, que troca `HOME` para `/root`. Rode sem `sudo` (adicione seu usuário ao grupo `docker`) ou defina `AIOR_DATA_DIR` e `AIOR_SESSIONS_DIR` com caminhos absolutos no `.env`.
+  - Se o caminho estiver certo, `AIOR_UID`/`AIOR_GID` não correspondem ao dono da pasta de dados.
 - **Porta ocupada:** defina outra `AIOR_PORT` no `.env`.
