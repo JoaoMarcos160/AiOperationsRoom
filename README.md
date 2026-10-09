@@ -8,6 +8,8 @@ Uma sala local para acompanhar sessões e subagentes do Claude Code. O aplicativ
 - [`uv` instalado](https://docs.astral.sh/uv/getting-started/installation/) e disponível no terminal
 - Claude Code, somente para acompanhar sessões reais
 
+Prefere não instalar `uv` e as dependências? Rode o servidor com Docker: veja [DOCKER.md](DOCKER.md). O hook continua precisando de Python 3 no host.
+
 ## Início rápido
 
 ```powershell
@@ -92,7 +94,7 @@ node --check frontend/app.js
 node --test tests/js/pixel.test.js
 ```
 
-Consulte [ARCHITECTURE.md](ARCHITECTURE.md), [DEVELOPMENT.md](DEVELOPMENT.md) e [HANDOFF.md](HANDOFF.md) para decisões e pontos de extensão.
+Consulte [ARCHITECTURE.md](ARCHITECTURE.md), [DEVELOPMENT.md](DEVELOPMENT.md), [DOCKER.md](DOCKER.md) e [HANDOFF.md](HANDOFF.md) para decisões e pontos de extensão.
 
 ## Limites atuais
 
