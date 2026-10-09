@@ -1,6 +1,6 @@
 # AI Operations Room
 
-Uma sala local para acompanhar sessões e subagentes do Claude Code. O aplicativo recebe somente metadados de hooks, mantém os dados em SQLite local e serve a interface em `127.0.0.1`.
+Uma sala local para acompanhar sessões, subagentes e consultas ao advisor do Claude Code. O aplicativo recebe somente metadados de hooks, mantém os dados em SQLite local e serve a interface em `127.0.0.1`.
 
 ## Requisitos
 
@@ -53,6 +53,8 @@ Use `--port 8876` em qualquer comando de servidor quando a porta padrão já est
 ## Hooks do Claude Code
 
 O registro altera `~/.claude/settings.json`: adiciona um command hook para `SessionStart`, `UserPromptSubmit`, `Stop`, `SubagentStart`, `SubagentStop` e `SessionEnd`. Antes de alterar o arquivo, revise seu conteúdo.
+
+As consultas ao advisor não têm hook próprio: o hook lê do transcript da sessão apenas o id e o horário de cada chamada e as mostra como um agente `Advisor` ligado a quem o consultou. Elas aparecem no próximo hook da sessão (no mais tardar, no fim do turno) ou quando o subagente termina, não em tempo real. Detalhes em [ARCHITECTURE.md](ARCHITECTURE.md#advisor).
 
 ```powershell
 uv run python -m backend.cli hooks-install
